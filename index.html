@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وظفني - المنصة الذكية للتوظيف العراقي</title>
     
-    <!-- CSS مضمن مباشرة -->
-    <style>
-        /* CSS كما في الأعلى - الصق كل الكود */
-    </style>
-    
+    <!-- روابط CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- الهيدر -->
-    <header>
+    <header class="header">
         <div class="container">
             <nav class="nav">
                 <div class="logo">
@@ -85,7 +83,7 @@
     </main>
 
     <!-- الفوتر -->
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div>
@@ -113,16 +111,34 @@
     </footer>
 
     <!-- نافذة التسجيل -->
-    <div id="registerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;">
-        <div style="background: white; padding: 30px; border-radius: 10px; max-width: 400px; width: 90%;">
-            <h3 style="color: #1e3a8a; margin-bottom: 20px;">انضم إلينا</h3>
-            <button class="btn btn-primary" onclick="alert('تسجيل كمرشح')">
-                <i class="fas fa-user"></i> تسجيل كمرشح
-            </button>
-            <button class="btn btn-primary" style="margin-top: 10px;" onclick="alert('تسجيل كشركة')">
-                <i class="fas fa-building"></i> تسجيل كشركة
-            </button>
-            <button class="btn btn-outline" style="margin-top: 20px;" onclick="closeModal()">إلغاء</button>
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h3>انضم إلينا</h3>
+            <div class="modal-tabs">
+                <button class="tab-btn active" onclick="switchTab('candidate')">
+                    <i class="fas fa-user"></i> باحث عن عمل
+                </button>
+                <button class="tab-btn" onclick="switchTab('company')">
+                    <i class="fas fa-building"></i> مسؤول توظيف
+                </button>
+            </div>
+            <div id="candidateForm" class="form">
+                <input type="text" id="candidateName" placeholder="الاسم الكامل">
+                <input type="email" id="candidateEmail" placeholder="البريد الإلكتروني">
+                <input type="password" id="candidatePassword" placeholder="كلمة المرور">
+                <button class="btn btn-primary" onclick="registerUser('candidate')">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب
+                </button>
+            </div>
+            <div id="companyForm" class="form" style="display: none;">
+                <input type="text" id="companyName" placeholder="اسم الشركة">
+                <input type="email" id="companyEmail" placeholder="البريد المؤسسي">
+                <input type="password" id="companyPassword" placeholder="كلمة مرور الشركة">
+                <button class="btn btn-primary" onclick="registerUser('company')">
+                    <i class="fas fa-building"></i> طلب حساب
+                </button>
+            </div>
+            <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
         </div>
     </div>
 
@@ -130,11 +146,39 @@
         // وظائف JavaScript بسيطة
         function showRegisterModal(type) {
             document.getElementById('registerModal').style.display = 'flex';
-            alert('تسجيل كـ ' + (type === 'candidate' ? 'مرشح' : 'شركة'));
         }
         
         function closeModal() {
             document.getElementById('registerModal').style.display = 'none';
+        }
+        
+        function switchTab(type) {
+            // إخفاء جميع النماذج
+            document.getElementById('candidateForm').style.display = 'none';
+            document.getElementById('companyForm').style.display = 'none';
+            
+            // إزالة active من جميع الأزرار
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // إظهار النموذج المختار وإضافة active للزر
+            if (type === 'candidate') {
+                document.getElementById('candidateForm').style.display = 'flex';
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            } else {
+                document.getElementById('companyForm').style.display = 'flex';
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            }
+        }
+        
+        function registerUser(type) {
+            const name = type === 'candidate' ? 
+                document.getElementById('candidateName').value :
+                document.getElementById('companyName').value;
+            
+            alert('تم طلب إنشاء حساب ' + (type === 'candidate' ? 'مرشح' : 'شركة') + ' باسم: ' + name);
+            closeModal();
         }
         
         // إغلاق النافذة عند النقر خارجها
