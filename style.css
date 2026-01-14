@@ -859,3 +859,40 @@ body {
         flex-direction: column;
     }
 }
+/* ========== تحسينات الهيدر الذكي ========== */
+.header.scrolled {
+    padding: 5px 0 !important;
+    height: 60px !important;
+}
+
+.header.scrolled .nav {
+    padding: 5px 0 !important;
+}
+
+.header.scrolled .logo i {
+    font-size: 24px !important;
+}
+
+.header.scrolled .logo-content h1 {
+    font-size: 18px !important;
+    margin: 0 !important;
+}
+
+.header.scrolled .nav-links a {
+    padding: 5px 0 !important;
+    font-size: 14px !important;
+}
+
+.header.scrolled .btn {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+}
+
+.header.scrolled .auth-buttons {
+    gap: 8px !important;
+}
+
+/* تأكد أن المحتوى الرئيسي يتناسب مع الهيدر المصغر */
+.header.scrolled + .main-content {
+    margin-top: 80px !important;
+}
