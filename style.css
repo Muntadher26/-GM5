@@ -962,6 +962,258 @@ body {
 .company-card[data-category="education"] .company-logo i {
     color: #8b5cf6;
 }
+
+/* ========== تحسينات الجوال المتقدمة ========== */
+@media (max-width: 768px) {
+    /* تحسين الهيدر على الجوال */
+    .header {
+        padding: 10px 0 !important;
+    }
+    
+    .header.scrolled {
+        height: 50px !important;
+        padding: 3px 0 !important;
+    }
+    
+    .nav {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        padding: 5px 0 !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+    }
+    
+    .logo {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .logo-content h1 {
+        font-size: 18px !important;
+    }
+    
+    .logo-content p {
+        display: none !important;
+    }
+    
+    /* إخفاء نص الروابط وعرض الأيقونات فقط */
+    .nav-links {
+        gap: 15px !important;
+        margin: 0 10px !important;
+        order: 3;
+        flex: 2;
+        justify-content: center;
+    }
+    
+    .nav-links a span {
+        display: none !important;
+    }
+    
+    .nav-links a {
+        padding: 8px !important;
+        font-size: 18px !important;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    
+    .nav-links a.active {
+        background: #eff6ff;
+    }
+    
+    /* تحسين أزرار المصادقة */
+    .auth-buttons {
+        order: 2;
+        gap: 8px !important;
+    }
+    
+    .auth-buttons .btn {
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        min-width: auto;
+    }
+    
+    .auth-buttons .btn span {
+        display: none !important;
+    }
+    
+    .auth-buttons .btn i {
+        margin: 0 !important;
+    }
+    
+    /* تحسين المحتوى الرئيسي */
+    .main-content {
+        margin-top: 100px !important;
+        padding: 20px 15px !important;
+    }
+    
+    .header.scrolled + .main-content {
+        margin-top: 60px !important;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.3;
+        margin-bottom: 15px;
+    }
+    
+    .hero-text {
+        font-size: 1rem !important;
+        margin-bottom: 25px;
+    }
+    
+    /* تحسين مربع البحث */
+    .search-box {
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .search-box input {
+        width: 100% !important;
+        padding: 12px !important;
+    }
+    
+    .search-box select {
+        width: 100% !important;
+        padding: 12px !important;
+    }
+    
+    /* تحسين المميزات */
+    .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .feature-item {
+        padding: 25px 20px !important;
+    }
+    
+    .feature-item h3 {
+        font-size: 1.2rem !important;
+    }
+    
+    /* تحسين أزرار العمل */
+    .btn-lg {
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+    }
+    
+    /* تحسين صفحة الشركات */
+    .companies-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .company-card {
+        padding: 20px !important;
+    }
+    
+    .company-card h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    .company-stats {
+        flex-direction: column !important;
+        gap: 10px !important;
+        text-align: right !important;
+    }
+    
+    /* تحسين الفلاتر */
+    .filter-tags {
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        padding-bottom: 15px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .filter-tags::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .filter-tag {
+        white-space: nowrap !important;
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+    }
+    
+    /* تحسين الفوتر */
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 25px !important;
+    }
+    
+    .footer h3, .footer h4 {
+        text-align: center !important;
+    }
+    
+    .footer a, .footer p {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* تحسينات إضافية للشاشات الصغيرة */
+    .logo-content h1 {
+        font-size: 16px !important;
+    }
+    
+    .logo i {
+        font-size: 24px !important;
+    }
+    
+    .header.scrolled .logo i {
+        font-size: 20px !important;
+    }
+    
+    .header.scrolled .logo-content h1 {
+        font-size: 14px !important;
+    }
+    
+    .nav-links {
+        gap: 10px !important;
+        margin: 0 5px !important;
+    }
+    
+    .nav-links a {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 16px !important;
+    }
+    
+    .auth-buttons .btn {
+        padding: 6px 10px !important;
+        font-size: 10px !important;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    /* تحسين النافذة المنبثقة */
+    .modal-content {
+        padding: 25px 20px !important;
+        width: 95% !important;
+        margin: 10px !important;
+    }
+    
+    .modal-tabs {
+        flex-direction: column !important;
+    }
+    
+    .tab-btn {
+        width: 100% !important;
+    }
+}
 /* تأكد أن المحتوى الرئيسي يتناسب مع الهيدر المصغر */
 .header.scrolled + .main-content {
     margin-top: 80px !important;
