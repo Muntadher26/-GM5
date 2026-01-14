@@ -891,7 +891,77 @@ body {
 .header.scrolled .auth-buttons {
     gap: 8px !important;
 }
+/* ========== تحسينات شعارات الشركات ========== */
+.company-logo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-radius: 20px;
+    padding: 20px;
+}
 
+.company-logo i {
+    font-size: 48px;
+    color: #3b82f6;
+    transition: all 0.3s ease;
+}
+
+.company-card:hover .company-logo i {
+    transform: scale(1.1);
+    color: #1d4ed8;
+}
+
+/* تخصيص ألوان الشعارات حسب القطاع */
+.company-card[data-category="tech"] .company-logo {
+    background: linear-gradient(135deg, #f0f9ff, #dbeafe);
+}
+
+.company-card[data-category="tech"] .company-logo i {
+    color: #3b82f6;
+}
+
+.company-card[data-category="finance"] .company-logo {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+}
+
+.company-card[data-category="finance"] .company-logo i {
+    color: #10b981;
+}
+
+.company-card[data-category="energy"] .company-logo {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+}
+
+.company-card[data-category="energy"] .company-logo i {
+    color: #f59e0b;
+}
+
+.company-card[data-category="health"] .company-logo {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+}
+
+.company-card[data-category="health"] .company-logo i {
+    color: #ef4444;
+}
+
+.company-card[data-category="construction"] .company-logo {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
+}
+
+.company-card[data-category="construction"] .company-logo i {
+    color: #f97316;
+}
+
+.company-card[data-category="education"] .company-logo {
+    background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+}
+
+.company-card[data-category="education"] .company-logo i {
+    color: #8b5cf6;
+}
 /* تأكد أن المحتوى الرئيسي يتناسب مع الهيدر المصغر */
 .header.scrolled + .main-content {
     margin-top: 80px !important;
