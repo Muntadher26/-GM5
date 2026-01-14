@@ -40,12 +40,201 @@
         </div>
     </header>
 
-    <!-- باقي المحتوى كما هو... -->
+    <!-- محتوى صفحة الشركات -->
+    <section class="companies-page">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">الشركات والتقييمات</h2>
+                <p class="page-subtitle">تعرف على أفضل الشركات العراقية وتقييمات الموظفين</p>
+            </div>
+            
+            <!-- البحث والتصفية -->
+            <div class="filters">
+                <div class="search-box">
+                    <input type="text" id="companySearch" placeholder="ابحث عن شركة أو مجال عمل...">
+                    <button class="btn btn-primary" onclick="searchCompanies()">
+                        <i class="fas fa-search"></i> بحث
+                    </button>
+                </div>
+                
+                <div class="filter-options">
+                    <select class="filter-select" id="industryFilter">
+                        <option value="">كل المجالات</option>
+                        <option value="تقنية المعلومات">تقنية المعلومات</option>
+                        <option value="المالية والمصرفية">المالية والمصرفية</option>
+                        <option value="الصحة والطب">الصحة والطب</option>
+                        <option value="النفط والغاز">النفط والغاز</option>
+                        <option value="التجارة">التجارة</option>
+                    </select>
+                    
+                    <select class="filter-select" id="cityFilter">
+                        <option value="">كل المدن</option>
+                        <option value="بغداد">بغداد</option>
+                        <option value="البصرة">البصرة</option>
+                        <option value="أربيل">أربيل</option>
+                        <option value="الموصل">الموصل</option>
+                    </select>
+                    
+                    <select class="filter-select" id="ratingFilter">
+                        <option value="0">كل التقييمات</option>
+                        <option value="4.5">5 نجوم</option>
+                        <option value="4">4 نجوم فأكثر</option>
+                        <option value="3">3 نجوم فأكثر</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- قائمة الشركات -->
+            <div class="companies-list" id="companiesList">
+                <!-- سيتم ملؤها بـ JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- التقييمات -->
+    <section class="reviews">
+        <div class="container">
+            <h2 class="section-title">آراء الموظفين</h2>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="avatar">م</div>
+                            <div>
+                                <h4>محمد أحمد</h4>
+                                <p>مهندس برمجيات سابق</p>
+                            </div>
+                        </div>
+                        <div class="rating">★★★★☆ 4.0</div>
+                    </div>
+                    <p class="review-text">"عملت في الشركة لمدة 3 سنوات، البيئة التقنية ممتازة والتعلم المستمر جزء من الثقافة"</p>
+                    <div class="review-meta">
+                        <span>تكنو سوفت العراق</span>
+                        <span>10 يناير 2024</span>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="avatar">س</div>
+                            <div>
+                                <h4>سارة علي</h4>
+                                <p>محاسبة حالية</p>
+                            </div>
+                        </div>
+                        <div class="rating">★★★★★ 5.0</div>
+                    </div>
+                    <p class="review-text">"أفضل مكان عمل في العراق! الإدارة تدعم الموظفين، الرواتب تنافسية، والتأمين الصحي شامل"</p>
+                    <div class="review-meta">
+                        <span>بنك الرافدين</span>
+                        <span>8 يناير 2024</span>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="avatar">ع</div>
+                            <div>
+                                <h4>علي كريم</h4>
+                                <p>مهندس ميكانيكي</p>
+                            </div>
+                        </div>
+                        <div class="rating">★★★★★ 5.0</div>
+                    </div>
+                    <p class="review-text">"شركة نفط الجنوب تقدم فرص تدريب وتطوير رائعة للموظفين، مع بيئة عمل محفزة"</p>
+                    <div class="review-meta">
+                        <span>شركة نفط الجنوب</span>
+                        <span>5 يناير 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3><i class="fas fa-handshake"></i> وظفني</h3>
+                    <p>شفافية في التقييمات، مصداقية في المعلومات</p>
+                </div>
+                
+                <div>
+                    <h4>تصفح الشركات</h4>
+                    <a href="#" onclick="filterTopRated()">أعلى التقييمات</a>
+                    <a href="#" onclick="filterMostJobs()">أكثر الوظائف</a>
+                    <a href="#" onclick="filterNewCompanies()">الشركات الناشئة</a>
+                </div>
+                
+                <div>
+                    <h4>تواصل معنا</h4>
+                    <p><i class="fas fa-phone"></i> 0770 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> info@wathafni.iq</p>
+                    <p><i class="fas fa-clock"></i> الأحد - الخميس: 9ص - 5م</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 وظفني - جميع التقييمات تخضع لمراجعة الجودة قبل النشر</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة التسجيل -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">انضم إلينا</h3>
+            
+            <div class="modal-tabs">
+                <button class="tab-btn active" onclick="switchTab('candidate')">
+                    <i class="fas fa-user"></i> باحث عن عمل
+                </button>
+                <button class="tab-btn" onclick="switchTab('company')">
+                    <i class="fas fa-building"></i> مسؤول توظيف
+                </button>
+            </div>
+            
+            <!-- نموذج المرشح -->
+            <div id="candidateForm" class="form">
+                <input type="text" id="candidateName" placeholder="الاسم الكامل">
+                <input type="email" id="candidateEmail" placeholder="البريد الإلكتروني">
+                <input type="password" id="candidatePassword" placeholder="كلمة المرور">
+                <input type="tel" id="candidatePhone" placeholder="رقم الهاتف">
+                <button class="btn btn-primary" onclick="registerUser('candidate')">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب
+                </button>
+            </div>
+            
+            <!-- نموذج الشركة -->
+            <div id="companyForm" class="form" style="display: none;">
+                <input type="text" id="companyName" placeholder="اسم الشركة">
+                <input type="email" id="companyEmail" placeholder="البريد المؤسسي">
+                <input type="password" id="companyPassword" placeholder="كلمة مرور الشركة">
+                <input type="tel" id="companyPhone" placeholder="هاتف الشركة">
+                <select id="companyIndustry">
+                    <option>اختر مجال العمل</option>
+                    <option>تقنية المعلومات</option>
+                    <option>المالية والمصرفية</option>
+                    <option>الصحة والطب</option>
+                    <option>النفط والغاز</option>
+                </select>
+                <button class="btn btn-primary" onclick="registerUser('company')">
+                    <i class="fas fa-building"></i> طلب حساب
+                </button>
+            </div>
+            
+            <button class="btn btn-text" onclick="closeModal()">إلغاء</button>
+        </div>
+    </div>
 
     <!-- إضافة JavaScript -->
     <script src="main.js"></script>
     
-    <!-- وظائف إضافية لصفحة الشركات فقط -->
+    <!-- وظائف إضافية لصفحة الشركات -->
     <script>
         function filterTopRated() {
             document.getElementById('ratingFilter').value = '4.5';
