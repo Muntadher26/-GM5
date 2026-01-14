@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- الهيدر -->
     <header class="header">
         <div class="container">
             <nav class="nav">
@@ -20,14 +19,12 @@
                         <p>المنصة الذكية للتوظيف العراقي</p>
                     </div>
                 </div>
-                
                 <div class="nav-links">
                     <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
                     <a href="companies.html" class="active"><i class="fas fa-building"></i> الشركات</a>
                     <a href="candidates.html"><i class="fas fa-users"></i> المرشحين</a>
                     <a href="jobs.html"><i class="fas fa-briefcase"></i> الوظائف</a>
                 </div>
-                
                 <div class="auth-buttons">
                     <button class="btn btn-outline" onclick="showRegisterModal('candidate')">
                         <i class="fas fa-user"></i> تسجيل كمرشح
@@ -40,146 +37,58 @@
         </div>
     </header>
 
-    <!-- محتوى صفحة الشركات -->
-    <section class="companies-page">
-        <div class="container">
-            <div class="page-header">
-                <h2 class="page-title">الشركات والتقييمات</h2>
-                <p class="page-subtitle">تعرف على أفضل الشركات العراقية وتقييمات الموظفين</p>
-            </div>
-            
-            <!-- البحث والتصفية -->
-            <div class="filters">
-                <div class="search-box">
-                    <input type="text" id="companySearch" placeholder="ابحث عن شركة أو مجال عمل...">
-                    <button class="btn btn-primary" onclick="searchCompanies()">
-                        <i class="fas fa-search"></i> بحث
-                    </button>
+    <div class="container" style="padding: 100px 20px; text-align: center;">
+        <h1 style="color: #1e3a8a;">الشركات</h1>
+        <p style="color: #6b7280; font-size: 18px; margin-top: 20px;">
+            قسم الشركات يعمل الآن!
+        </p>
+        
+        <div style="max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #1e3a8a; margin-bottom: 20px;">شركات مسجلة:</h3>
+            <div style="text-align: right;">
+                <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                    <strong>تكنو سوفت العراق</strong> - تقنية المعلومات
                 </div>
-                
-                <div class="filter-options">
-                    <select class="filter-select" id="industryFilter">
-                        <option value="">كل المجالات</option>
-                        <option value="تقنية المعلومات">تقنية المعلومات</option>
-                        <option value="المالية والمصرفية">المالية والمصرفية</option>
-                        <option value="الصحة والطب">الصحة والطب</option>
-                        <option value="النفط والغاز">النفط والغاز</option>
-                        <option value="التجارة">التجارة</option>
-                    </select>
-                    
-                    <select class="filter-select" id="cityFilter">
-                        <option value="">كل المدن</option>
-                        <option value="بغداد">بغداد</option>
-                        <option value="البصرة">البصرة</option>
-                        <option value="أربيل">أربيل</option>
-                        <option value="الموصل">الموصل</option>
-                    </select>
-                    
-                    <select class="filter-select" id="ratingFilter">
-                        <option value="0">كل التقييمات</option>
-                        <option value="4.5">5 نجوم</option>
-                        <option value="4">4 نجوم فأكثر</option>
-                        <option value="3">3 نجوم فأكثر</option>
-                    </select>
+                <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                    <strong>بنك الرافدين</strong> - خدمات مالية
                 </div>
-            </div>
-            
-            <!-- قائمة الشركات -->
-            <div class="companies-list" id="companiesList">
-                <!-- سيتم ملؤها بـ JavaScript -->
-            </div>
-        </div>
-    </section>
-    
-    <!-- التقييمات -->
-    <section class="reviews">
-        <div class="container">
-            <h2 class="section-title">آراء الموظفين</h2>
-            
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="reviewer">
-                            <div class="avatar">م</div>
-                            <div>
-                                <h4>محمد أحمد</h4>
-                                <p>مهندس برمجيات سابق</p>
-                            </div>
-                        </div>
-                        <div class="rating">★★★★☆ 4.0</div>
-                    </div>
-                    <p class="review-text">"عملت في الشركة لمدة 3 سنوات، البيئة التقنية ممتازة والتعلم المستمر جزء من الثقافة"</p>
-                    <div class="review-meta">
-                        <span>تكنو سوفت العراق</span>
-                        <span>10 يناير 2024</span>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="reviewer">
-                            <div class="avatar">س</div>
-                            <div>
-                                <h4>سارة علي</h4>
-                                <p>محاسبة حالية</p>
-                            </div>
-                        </div>
-                        <div class="rating">★★★★★ 5.0</div>
-                    </div>
-                    <p class="review-text">"أفضل مكان عمل في العراق! الإدارة تدعم الموظفين، الرواتب تنافسية، والتأمين الصحي شامل"</p>
-                    <div class="review-meta">
-                        <span>بنك الرافدين</span>
-                        <span>8 يناير 2024</span>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="reviewer">
-                            <div class="avatar">ع</div>
-                            <div>
-                                <h4>علي كريم</h4>
-                                <p>مهندس ميكانيكي</p>
-                            </div>
-                        </div>
-                        <div class="rating">★★★★★ 5.0</div>
-                    </div>
-                    <p class="review-text">"شركة نفط الجنوب تقدم فرص تدريب وتطوير رائعة للموظفين، مع بيئة عمل محفزة"</p>
-                    <div class="review-meta">
-                        <span>شركة نفط الجنوب</span>
-                        <span>5 يناير 2024</span>
-                    </div>
+                <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                    <strong>شركة نفط الجنوب</strong> - نفط وغاز
                 </div>
             </div>
         </div>
-    </section>
+        
+        <button class="btn btn-primary" onclick="showRegisterModal('company')" style="margin-top: 30px;">
+            <i class="fas fa-building"></i> تسجيل شركتك
+        </button>
+        
+        <a href="index.html" class="btn btn-outline" style="margin-top: 30px; margin-right: 10px;">
+            <i class="fas fa-home"></i> العودة للرئيسية
+        </a>
+    </div>
 
-    <!-- الفوتر -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div>
                     <h3><i class="fas fa-handshake"></i> وظفني</h3>
-                    <p>شفافية في التقييمات، مصداقية في المعلومات</p>
+                    <p>المنصة الذكية للتوظيف العراقي</p>
                 </div>
-                
                 <div>
-                    <h4>تصفح الشركات</h4>
-                    <a href="#" onclick="filterTopRated()">أعلى التقييمات</a>
-                    <a href="#" onclick="filterMostJobs()">أكثر الوظائف</a>
-                    <a href="#" onclick="filterNewCompanies()">الشركات الناشئة</a>
+                    <h4>روابط سريعة</h4>
+                    <a href="index.html">الرئيسية</a>
+                    <a href="companies.html">الشركات</a>
+                    <a href="candidates.html">المرشحين</a>
+                    <a href="jobs.html">الوظائف</a>
                 </div>
-                
                 <div>
                     <h4>تواصل معنا</h4>
                     <p><i class="fas fa-phone"></i> 0770 123 4567</p>
                     <p><i class="fas fa-envelope"></i> info@wathafni.iq</p>
-                    <p><i class="fas fa-clock"></i> الأحد - الخميس: 9ص - 5م</p>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>© 2024 وظفني - جميع التقييمات تخضع لمراجعة الجودة قبل النشر</p>
+                <p>© 2024 وظفني - المنصة الذكية للتوظيف العراقي</p>
             </div>
         </div>
     </footer>
@@ -188,7 +97,6 @@
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <h3 id="modalTitle">انضم إلينا</h3>
-            
             <div class="modal-tabs">
                 <button class="tab-btn active" onclick="switchTab('candidate')">
                     <i class="fas fa-user"></i> باحث عن عمل
@@ -197,57 +105,35 @@
                     <i class="fas fa-building"></i> مسؤول توظيف
                 </button>
             </div>
-            
-            <!-- نموذج المرشح -->
             <div id="candidateForm" class="form">
                 <input type="text" id="candidateName" placeholder="الاسم الكامل">
                 <input type="email" id="candidateEmail" placeholder="البريد الإلكتروني">
                 <input type="password" id="candidatePassword" placeholder="كلمة المرور">
-                <input type="tel" id="candidatePhone" placeholder="رقم الهاتف">
                 <button class="btn btn-primary" onclick="registerUser('candidate')">
                     <i class="fas fa-user-plus"></i> إنشاء حساب
                 </button>
             </div>
-            
-            <!-- نموذج الشركة -->
             <div id="companyForm" class="form" style="display: none;">
                 <input type="text" id="companyName" placeholder="اسم الشركة">
                 <input type="email" id="companyEmail" placeholder="البريد المؤسسي">
                 <input type="password" id="companyPassword" placeholder="كلمة مرور الشركة">
-                <input type="tel" id="companyPhone" placeholder="هاتف الشركة">
-                <select id="companyIndustry">
-                    <option>اختر مجال العمل</option>
-                    <option>تقنية المعلومات</option>
-                    <option>المالية والمصرفية</option>
-                    <option>الصحة والطب</option>
-                    <option>النفط والغاز</option>
-                </select>
                 <button class="btn btn-primary" onclick="registerUser('company')">
                     <i class="fas fa-building"></i> طلب حساب
                 </button>
             </div>
-            
             <button class="btn btn-text" onclick="closeModal()">إلغاء</button>
         </div>
     </div>
 
-    <!-- إضافة JavaScript -->
     <script src="main.js"></script>
-    
-    <!-- وظائف إضافية لصفحة الشركات -->
     <script>
-        function filterTopRated() {
-            document.getElementById('ratingFilter').value = '4.5';
-            searchCompanies();
-        }
+        // دالة اختبار بسيطة
+        console.log('صفحة الشركات محملة');
         
-        function filterMostJobs() {
-            alert('قريباً: سيتم عرض الشركات ذات الوظائف الأكثر');
-        }
-        
-        function filterNewCompanies() {
-            alert('قريباً: سيتم عرض الشركات الناشئة');
-        }
+        // اختبار زر التسجيل
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            console.log('زر التسجيل تم النقر عليه');
+        });
     </script>
 </body>
 </html>
