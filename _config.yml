@@ -2,7 +2,7 @@
 title: "وظفني - المنصة الذكية للتوظيف العراقي"
 description: "أول منصة توظيف ذكية في العراق"
 baseurl: ""
-url: "https://muntadher26.github.io/Quadrat"
+url: "https://muntadher26.github.io"
 lang: "ar"
 rtl: true
 
@@ -10,11 +10,4 @@ rtl: true
 permalink: pretty
 markdown: kramdown
 highlighter: rouge
-plugins:
-  - jekyll-feed
-
-# إعدادات الموقع
 theme: null
-exclude:
-  - README.md
-  - nojekyll.sh
