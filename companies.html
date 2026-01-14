@@ -5,389 +5,211 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الشركات - وظفني</title>
     
-    <!-- روابط CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- وصف الصفحة -->
+    <!-- Meta Tags -->
     <meta name="description" content="تصفح أفضل الشركات العراقية المسجلة في منصة وظفني للتوظيف">
     <meta name="keywords" content="شركات عراقية, توظيف, عمل, فرص عمل, العراق">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- الهيدر -->
-    <header class="header">
+    <!-- Header -->
+    <header class="site-header" id="siteHeader">
         <div class="container">
-            <nav class="nav">
+            <nav class="main-nav">
+                <!-- Logo -->
                 <a href="index.html" class="logo">
-                    <i class="fas fa-handshake"></i>
-                    <div class="logo-content">
+                    <i class="fas fa-handshake logo-icon"></i>
+                    <div class="logo-text">
                         <h1>وظفني</h1>
                         <p>المنصة الذكية للتوظيف العراقي</p>
                     </div>
                 </a>
                 
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">
                         <i class="fas fa-home"></i>
-                        <span>الرئيسية</span>
+                        الرئيسية
                     </a>
                     <a href="companies.html" class="active">
                         <i class="fas fa-building"></i>
-                        <span>الشركات</span>
-                    </a>
-                    <a href="candidates.html">
-                        <i class="fas fa-users"></i>
-                        <span>المرشحين</span>
-                    </a>
-                    <a href="jobs.html">
-                        <i class="fas fa-briefcase"></i>
-                        <span>الوظائف</span>
-                    </a>
-                </div>
-                
-                <div class="auth-buttons">
-                    <button class="btn btn-outline" onclick="showRegisterModal('candidate')">
-                        <i class="fas fa-user"></i>
-                        <span>تسجيل كمرشح</span>
-                    </button>
-                    <button class="btn btn-primary" onclick="showRegisterModal('company')">
-                        <i class="fas fa-building"></i>
-                        <span>تسجيل كشركة</span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- محتوى الشركات -->
-    <main class="container" style="margin-top: 140px;">
-        <!-- رأس الصفحة -->
-        <div class="page-header">
-            <h1>
-                <i class="fas fa-building"></i>
-                الشركات المسجلة
-            </h1>
-            <p class="subtitle">اكتشف أفضل الشركات العراقية وابحث عن فرص العمل المناسبة لك</p>
-        </div>
-
-        <!-- فلترة الشركات -->
-        <div class="filters">
-            <div class="search-box">
-                <input type="text" id="companySearch" placeholder="ابحث عن شركة أو مجال عمل...">
-                <button class="btn btn-primary" onclick="searchCompanies()">
-                    <i class="fas fa-search"></i>
-                    بحث
-                </button>
-            </div>
-            
-            <div class="filter-tags">
-                <span class="filter-tag active" data-category="all">الكل</span>
-                <span class="filter-tag" data-category="tech">التقنية</span>
-                <span class="filter-tag" data-category="finance">المالية</span>
-                <span class="filter-tag" data-category="energy">الطاقة</span>
-                <span class="filter-tag" data-category="health">الصحة</span>
-                <span class="filter-tag" data-category="construction">المقاولات</span>
-                <span class="filter-tag" data-category="education">التعليم</span>
-            </div>
-        </div>
-
-        <!-- شبكة بطاقات الشركات -->
-        <div class="companies-grid" id="companiesList">
-            <!-- سيتم تحميل الشركات ديناميكياً -->
-        </div>
-
-        <!-- قسم CTA -->
-        <div class="cta-section">
-            <h2>هل تمثل شركة وتبحث عن مواهب مميزة؟</h2>
-            <p>انضم إلى أكثر من 250 شركة عراقية تستخدم منصتنا للعثور على أفضل الكفاءات</p>
-            <button class="btn btn-primary btn-lg" onclick="showRegisterModal('company')">
-                <i class="fas fa-building"></i>
-                سجل شركتك الآن
-            </button>
-        </div>
-    </main>
-
-    <!-- الفوتر -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h3>
-                        <i class="fas fa-handshake"></i>
-                        وظفني
-                    </h3>
-                    <p>المنصة الذكية للتوظيف العراقي</p>
-                </div>
-                
-                <div>
-                    <h4>روابط سريعة</h4>
-                    <a href="index.html">
-                        <i class="fas fa-chevron-left"></i>
-                        الرئيسية
-                    </a>
-                    <a href="companies.html">
-                        <i class="fas fa-chevron-left"></i>
                         الشركات
                     </a>
                     <a href="candidates.html">
-                        <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-users"></i>
                         المرشحين
                     </a>
                     <a href="jobs.html">
-                        <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-briefcase"></i>
                         الوظائف
                     </a>
                 </div>
                 
-                <div>
-                    <h4>تواصل معنا</h4>
-                    <p>
-                        <i class="fas fa-phone"></i>
-                        0770 123 4567
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope"></i>
-                        info@wathafni.iq
-                    </p>
-                    <p>
-                        <i class="fas fa-clock"></i>
-                        الأحد - الخميس: 9ص - 5م
-                    </p>
+                <!-- Auth Buttons -->
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="showRegisterModal('candidate')">
+                        <i class="fas fa-user"></i>
+                        تسجيل كمرشح
+                    </button>
+                    <button class="btn btn-primary" onclick="showRegisterModal('company')">
+                        <i class="fas fa-building"></i>
+                        تسجيل كشركة
+                    </button>
                 </div>
-            </div>
-            
-            <div class="copyright">
-                <p>© <span id="currentYear">2024</span> وظفني - المنصة الذكية للتوظيف العراقي</p>
-            </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
         </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <!-- Same as index.html -->
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-building"></i>
+                    الشركات المسجلة
+                </h1>
+                <p class="page-subtitle">
+                    اكتشف أفضل الشركات العراقية وابحث عن فرص العمل المناسبة لك
+                </p>
+            </div>
+
+            <!-- Filters Section -->
+            <section class="filters-section">
+                <!-- Search -->
+                <div class="search-filter">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="ابحث عن شركة أو مجال عمل...">
+                        <button class="btn btn-primary search-button" onclick="performSearch()">
+                            <i class="fas fa-search"></i>
+                            بحث
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter Tags -->
+                <div class="filter-tags">
+                    <span class="filter-tag active" data-filter="all">الكل</span>
+                    <span class="filter-tag" data-filter="tech">التقنية</span>
+                    <span class="filter-tag" data-filter="finance">المالية</span>
+                    <span class="filter-tag" data-filter="energy">الطاقة</span>
+                    <span class="filter-tag" data-filter="health">الصحة</span>
+                    <span class="filter-tag" data-filter="construction">المقاولات</span>
+                    <span class="filter-tag" data-filter="education">التعليم</span>
+                </div>
+            </section>
+
+            <!-- Companies Grid -->
+            <section>
+                <div class="companies-grid" id="companiesList">
+                    <!-- Companies will be loaded here -->
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2 class="cta-title">هل تمثل شركة وتبحث عن مواهب مميزة؟</h2>
+                    <p class="cta-text">
+                        انضم إلى أكثر من 250 شركة عراقية تستخدم منصتنا للعثور على أفضل الكفاءات
+                    </p>
+                    <button class="btn btn-primary btn-lg" onclick="showRegisterModal('company')">
+                        <i class="fas fa-building"></i>
+                        سجل شركتك الآن
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <!-- Same as index.html -->
     </footer>
 
-    <!-- نافذة التسجيل -->
-    <div id="registerModal" class="modal">
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <!-- Modal content -->
         <div class="modal-content">
-            <h3>
-                <i class="fas fa-user-plus"></i>
-                انضم إلينا
-            </h3>
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-user-plus"></i>
+                    انضم إلى مجتمعنا
+                </h3>
+                <button type="button" class="btn btn-text" data-close-modal>
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
             
+            <!-- Tabs -->
             <div class="modal-tabs">
-                <button class="tab-btn active" onclick="switchTab('candidate')">
+                <button class="tab-button active" data-tab="candidate">
                     <i class="fas fa-user"></i>
                     باحث عن عمل
                 </button>
-                <button class="tab-btn" onclick="switchTab('company')">
+                <button class="tab-button" data-tab="company">
                     <i class="fas fa-building"></i>
                     مسؤول توظيف
                 </button>
             </div>
             
-            <div id="candidateForm" class="form">
-                <input type="text" id="candidateName" placeholder="الاسم الكامل">
-                <input type="email" id="candidateEmail" placeholder="البريد الإلكتروني">
-                <input type="password" id="candidatePassword" placeholder="كلمة المرور">
-                <button class="btn btn-primary" onclick="registerUser('candidate')">
+            <!-- Candidate Form -->
+            <form id="candidateForm" class="form" style="display: flex;">
+                <input type="text" id="candidateName" class="form-input" placeholder="الاسم الكامل" required>
+                <input type="email" id="candidateEmail" class="form-input" placeholder="البريد الإلكتروني" required>
+                <input type="password" id="candidatePassword" class="form-input" placeholder="كلمة المرور (6 أحرف على الأقل)" minlength="6" required>
+                <select class="form-input">
+                    <option value="">اختر مجال تخصصك</option>
+                    <option value="tech">تقنية المعلومات</option>
+                    <option value="engineering">الهندسة</option>
+                    <option value="finance">المالية</option>
+                    <option value="marketing">التسويق</option>
+                    <option value="education">التعليم</option>
+                </select>
+                <button type="submit" class="btn btn-primary">
                     <i class="fas fa-user-plus"></i>
-                    إنشاء حساب
+                    إنشاء حساب مرشح
                 </button>
-            </div>
+            </form>
             
-            <div id="companyForm" class="form" style="display: none;">
-                <input type="text" id="companyName" placeholder="اسم الشركة">
-                <input type="email" id="companyEmail" placeholder="البريد المؤسسي">
-                <input type="password" id="companyPassword" placeholder="كلمة مرور الشركة">
-                <button class="btn btn-primary" onclick="registerUser('company')">
+            <!-- Company Form -->
+            <form id="companyForm" class="form" style="display: none;">
+                <input type="text" id="companyName" class="form-input" placeholder="اسم الشركة" required>
+                <input type="email" id="companyEmail" class="form-input" placeholder="البريد المؤسسي" required>
+                <input type="password" id="companyPassword" class="form-input" placeholder="كلمة مرور الشركة" minlength="6" required>
+                <select class="form-input">
+                    <option value="">اختر قطاع الشركة</option>
+                    <option value="tech">تقنية المعلومات</option>
+                    <option value="finance">المالية والبنوك</option>
+                    <option value="energy">النفط والطاقة</option>
+                    <option value="health">الصحة</option>
+                    <option value="education">التعليم</option>
+                    <option value="construction">المقاولات</option>
+                </select>
+                <button type="submit" class="btn btn-primary">
                     <i class="fas fa-building"></i>
-                    طلب حساب
+                    طلب حساب شركة
                 </button>
-            </div>
-            
-            <button class="btn btn-outline" onclick="closeModal()" style="margin-top: 20px;">
-                <i class="fas fa-times"></i>
-                إلغاء
-            </button>
+            </form>
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script src="main.js"></script>
-    
-    <script>
-        // تحديث السنة الحالية
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // تحميل الشركات عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof loadCompanies === 'function') {
-                loadCompanies();
-            }
-            if (typeof setupFilterTags === 'function') {
-                setupFilterTags();
-            }
-        });
-    </script>
 </body>
 </html>
-
-<script>
-// دالة محسنة لتحميل الشركات
-function loadCompanies() {
-    const container = document.getElementById('companiesList');
-    if (!container) return;
-    
-    // بيانات الشركات مع شعارات مناسبة
-    const companies = [
-        {
-            id: 1,
-            name: "تكنو سوفت العراق",
-            category: "tech",
-            description: "شركة رائدة في مجال تطوير البرمجيات والحلول التقنية في العراق",
-            logo: '<i class="fas fa-laptop-code" style="font-size: 40px; color: #3b82f6;"></i>',
-            jobs: 12,
-            rating: 4.8,
-            location: "بغداد",
-            established: 2010
-        },
-        {
-            id: 2,
-            name: "بنك الرافدين",
-            category: "finance",
-            description: "أحد أكبر البنوك العراقية يقدم خدمات مصرفية متكاملة",
-            logo: '<i class="fas fa-university" style="font-size: 40px; color: #10b981;"></i>',
-            jobs: 24,
-            rating: 4.6,
-            location: "كافة المحافظات",
-            established: 1941
-        },
-        {
-            id: 3,
-            name: "شركة نفط الجنوب",
-            category: "energy",
-            description: "الشركة الرائدة في مجال استخراج وتصنيع النفط والغاز",
-            logo: '<i class="fas fa-oil-can" style="font-size: 40px; color: #f59e0b;"></i>',
-            jobs: 45,
-            rating: 4.9,
-            location: "البصرة",
-            established: 1972
-        },
-        {
-            id: 4,
-            name: "مستشفى الكفيل التخصصي",
-            category: "health",
-            description: "مستشفى متخصص يقدم خدمات طبية متطورة في كافة التخصصات",
-            logo: '<i class="fas fa-hospital" style="font-size: 40px; color: #ef4444;"></i>',
-            jobs: 18,
-            rating: 4.7,
-            location: "كربلاء",
-            established: 2003
-        },
-        {
-            id: 5,
-            name: "زين العراق",
-            category: "tech",
-            description: "شركة اتصالات رائدة في العراق تقدم خدمات الجيل الرابع",
-            logo: '<i class="fas fa-mobile-alt" style="font-size: 40px; color: #8b5cf6;"></i>',
-            jobs: 32,
-            rating: 4.5,
-            location: "كافة المحافظات",
-            established: 2003
-        },
-        {
-            id: 6,
-            name: "مجموعة الناصر",
-            category: "finance",
-            description: "مجموعة استثمارية متنوعة الأنشطة في القطاع المالي والتجاري",
-            logo: '<i class="fas fa-chart-line" style="font-size: 40px; color: #06b6d4;"></i>',
-            jobs: 15,
-            rating: 4.4,
-            location: "بغداد",
-            established: 1998
-        },
-        {
-            id: 7,
-            name: "أسياد للإنشاءات",
-            category: "construction",
-            description: "شركة متخصصة في الإنشاءات والبنية التحتية",
-            logo: '<i class="fas fa-truck" style="font-size: 40px; color: #f97316;"></i>',
-            jobs: 22,
-            rating: 4.3,
-            location: "أربيل",
-            established: 2005
-        },
-        {
-            id: 8,
-            name: "أكاديمية العراق الرقمية",
-            category: "education",
-            description: "مؤسسة تعليمية رائدة في مجال التدريب التقني",
-            logo: '<i class="fas fa-graduation-cap" style="font-size: 40px; color: #ec4899;"></i>',
-            jobs: 8,
-            rating: 4.8,
-            location: "بغداد",
-            established: 2015
-        }
-    ];
-    
-    // حفظ البيانات في localStorage
-    localStorage.setItem('wathafni_companies', JSON.stringify(companies));
-    
-    // مسح المحتوى القديم
-    container.innerHTML = '';
-    
-    // إنشاء بطاقات الشركات
-    companies.forEach(company => {
-        const card = document.createElement('div');
-        card.className = 'company-card';
-        card.dataset.category = company.category;
-        
-        card.innerHTML = `
-            <div class="company-logo">${company.logo}</div>
-            <div class="company-info">
-                <h3>${company.name}</h3>
-                <span class="company-category">${getCategoryName(company.category)}</span>
-                <p class="company-description">${company.description}</p>
-                <div class="company-stats">
-                    <span><i class="fas fa-briefcase"></i> ${company.jobs} وظيفة</span>
-                    <span><i class="fas fa-star"></i> ${company.rating}/5</span>
-                    <span><i class="fas fa-map-marker-alt"></i> ${company.location}</span>
-                </div>
-            </div>
-            <button class="btn btn-outline btn-block" onclick="viewCompany(${company.id})">
-                <i class="fas fa-eye"></i> عرض التفاصيل
-            </button>
-        `;
-        
-        container.appendChild(card);
-    });
-    
-    // إضافة تأثيرات عند التمرير
-    animateOnScroll();
-}
-
-// دالة محسنة للحصول على اسم القطاع
-function getCategoryName(category) {
-    const categories = {
-        'tech': 'تقنية المعلومات',
-        'finance': 'خدمات مالية',
-        'energy': 'طاقة ونفط',
-        'health': 'رعاية صحية',
-        'construction': 'إنشاءات ومقاولات',
-        'education': 'تعليم وتدريب'
-    };
-    return categories[category] || category;
-}
-
-// عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    // تحميل الشركات مباشرة
-    loadCompanies();
-    
-    // إعداد الفلاتر
-    if (typeof setupFilterTags === 'function') {
-        setupFilterTags();
-    }
-    
-    // إعداد الهيدر الذكي
-    if (typeof initSmartHeader === 'function') {
-        initSmartHeader();
-    }
-});
-</script>
