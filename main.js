@@ -1,6 +1,6 @@
 // ========== تهيئة النظام ==========
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 وظفني - تم تحميل الصفحة بنجاح');
+    console.log('🚀 قدرات - تم تحميل الصفحة بنجاح');
     
     // تهيئة الهيدر الذكي
     initSmartHeader();
@@ -538,7 +538,7 @@ function addNewCompany(companyName) {
         id: companies.length + 1,
         name: companyName,
         category: "tech",
-        description: "شركة جديدة مسجلة في منصة وظفني",
+        description: "شركة جديدة مسجلة في منصة قدرات",
         logo: "🏢",
         jobs: Math.floor(Math.random() * 20) + 1,
         rating: (Math.random() * 1 + 4).toFixed(1),
