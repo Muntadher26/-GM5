@@ -9,33 +9,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- وصف الموقع -->
+    <meta name="description" content="المنصة الذكية الأولى للتوظيف في العراق - نوصل الموهبة العراقية بالفرص المناسبة">
+    <meta name="keywords" content="وظائف, توظيف, العراق, شركات, مرشحين, عمل">
+    <meta name="author" content="وظفني">
+    
+    <!-- ألوان الموقع -->
+    <meta name="theme-color" content="#1e3a8a">
 </head>
 <body>
     <!-- الهيدر -->
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <div class="logo">
+                <a href="index.html" class="logo">
                     <i class="fas fa-handshake"></i>
-                    <div>
+                    <div class="logo-content">
                         <h1>وظفني</h1>
                         <p>المنصة الذكية للتوظيف العراقي</p>
                     </div>
-                </div>
+                </a>
                 
                 <div class="nav-links">
-                    <a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a>
-                    <a href="companies.html"><i class="fas fa-building"></i> الشركات</a>
-                    <a href="candidates.html"><i class="fas fa-users"></i> المرشحين</a>
-                    <a href="jobs.html"><i class="fas fa-briefcase"></i> الوظائف</a>
+                    <a href="index.html" class="active">
+                        <i class="fas fa-home"></i>
+                        <span>الرئيسية</span>
+                    </a>
+                    <a href="companies.html">
+                        <i class="fas fa-building"></i>
+                        <span>الشركات</span>
+                    </a>
+                    <a href="candidates.html">
+                        <i class="fas fa-users"></i>
+                        <span>المرشحين</span>
+                    </a>
+                    <a href="jobs.html">
+                        <i class="fas fa-briefcase"></i>
+                        <span>الوظائف</span>
+                    </a>
                 </div>
                 
                 <div class="auth-buttons">
                     <button class="btn btn-outline" onclick="showRegisterModal('candidate')">
-                        <i class="fas fa-user"></i> تسجيل كمرشح
+                        <i class="fas fa-user"></i>
+                        <span>تسجيل كمرشح</span>
                     </button>
                     <button class="btn btn-primary" onclick="showRegisterModal('company')">
-                        <i class="fas fa-building"></i> تسجيل كشركة
+                        <i class="fas fa-building"></i>
+                        <span>تسجيل كشركة</span>
                     </button>
                 </div>
             </nav>
@@ -44,42 +66,110 @@
 
     <!-- المحتوى الرئيسي -->
     <main class="main-content container">
-        <h1>مرحباً بكم في وظفني</h1>
-        <p class="hero-text">المنصة الذكية الأولى للتوظيف في العراق</p>
-        
-        <div class="features">
-            <h2>مميزات المنصة</h2>
+        <!-- قسم البطل -->
+        <section class="hero-section">
+            <h1>وصلنا الموهبة العراقية بالفرص المناسبة</h1>
+            <p class="hero-text">
+                منصتنا تقدم حلول توظيف ذكية تربط أفضل المواهب العراقية بأفضل الشركات
+                في جميع أنحاء العراق. انضم إلى مجتمعنا المتنامي اليوم!
+            </p>
+            
+            <div class="search-box" style="max-width: 600px; margin: 0 auto;">
+                <input type="text" placeholder="ابحث عن وظيفة، شركة، أو مهارة...">
+                <select style="padding: 14px; border: 2px solid #e5e7eb; border-radius: var(--radius);">
+                    <option>جميع الفئات</option>
+                    <option>تقنية المعلومات</option>
+                    <option>المالية</option>
+                    <option>الهندسة</option>
+                    <option>التعليم</option>
+                </select>
+                <button class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                    بحث
+                </button>
+            </div>
+        </section>
+
+        <!-- قسم المميزات -->
+        <section class="features">
+            <h2>لماذا تختار وظفني؟</h2>
+            
             <div class="features-grid">
                 <div class="feature-item">
                     <i class="fas fa-search"></i>
-                    <h3>بحث ذكي</h3>
-                    <p>ابحث عن الوظائف المناسبة لمهاراتك بسهولة</p>
+                    <h3>بحث ذكي ومتقدم</h3>
+                    <p>ابحث عن الوظائف المناسبة لمهاراتك وخبراتك باستخدام خوارزميات بحث متقدمة</p>
                 </div>
+                
                 <div class="feature-item">
                     <i class="fas fa-building"></i>
-                    <h3>شركات موثقة</h3>
-                    <p>تعامل مع أفضل الشركات العراقية الموثوقة</p>
+                    <h3>شركات موثقة ومعتمدة</h3>
+                    <p>تعامل مع أفضل الشركات العراقية الموثوقة بعد التحقق من سجلاتها ومصداقيتها</p>
                 </div>
+                
                 <div class="feature-item">
                     <i class="fas fa-shield-alt"></i>
-                    <h3>آمن ومضمون</h3>
-                    <p>بيئة آمنة للبحث والتقديم على الوظائف</p>
+                    <h3>بيئة آمنة ومضمونة</h3>
+                    <p>نضمن لك بيئة آمنة للبحث والتقديم على الوظائف مع حماية بياناتك الشخصية</p>
                 </div>
+                
                 <div class="feature-item">
                     <i class="fas fa-bolt"></i>
-                    <h3>سريع وسهل</h3>
-                    <p>قدم على الوظائف بخطوات بسيطة وسريعة</p>
+                    <h3>سريع وسهل الاستخدام</h3>
+                    <p>قدم على الوظائف بخطوات بسيطة وسريعة مع واجهة مستخدم بديهية وسهلة</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>تتبع مستمر للتقدم</h3>
+                    <p>تتبع حالة طلباتك وتقدمك في عمليات التوظيف مع إشعارات فورية</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>دعم فني متواصل</h3>
+                    <p>فريق دعم فني عراقي جاهز لمساعدتك على مدار الساعة طوال أيام الأسبوع</p>
                 </div>
             </div>
-        </div>
-        
-        <a href="companies.html" class="btn btn-primary">
-            <i class="fas fa-building"></i> تصفح الشركات
-        </a>
-        
-        <button class="btn btn-outline" style="margin-right: 10px;" onclick="showRegisterModal('candidate')">
-            <i class="fas fa-user"></i> تسجيل كمرشح
-        </button>
+            
+            <div style="margin-top: 50px; display: flex; gap: 20px; justify-content: center;">
+                <a href="companies.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-building"></i>
+                    تصفح الشركات
+                </a>
+                
+                <button class="btn btn-outline btn-lg" onclick="showRegisterModal('candidate')">
+                    <i class="fas fa-user"></i>
+                    سجل كمرشح
+                </button>
+            </div>
+        </section>
+
+        <!-- قسم الإحصائيات -->
+        <section style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 70px 0; border-radius: var(--radius); margin: 80px 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 50px; color: white;">أرقامنا تتحدث</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+                    <div>
+                        <div style="font-size: 48px; font-weight: 700; margin-bottom: 10px;">250+</div>
+                        <div style="font-size: 18px;">شركة مسجلة</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; font-weight: 700; margin-bottom: 10px;">5,000+</div>
+                        <div style="font-size: 18px;">مرشح نشط</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; font-weight: 700; margin-bottom: 10px;">1,200+</div>
+                        <div style="font-size: 18px;">وظيفة شاغرة</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; font-weight: 700; margin-bottom: 10px;">350+</div>
+                        <div style="font-size: 18px;">توظيف ناجح</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- الفوتر -->
@@ -87,25 +177,62 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h3><i class="fas fa-handshake"></i> وظفني</h3>
-                    <p>نوصل الموهبة العراقية بالفرص المناسبة</p>
+                    <h3>
+                        <i class="fas fa-handshake"></i>
+                        وظفني
+                    </h3>
+                    <p>نوصل الموهبة العراقية بالفرص المناسبة في سوق العمل العراقي</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="font-size: 20px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="font-size: 20px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="font-size: 20px;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="font-size: 20px;"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
+                
                 <div>
                     <h4>روابط سريعة</h4>
-                    <a href="index.html">الرئيسية</a>
-                    <a href="companies.html">الشركات</a>
-                    <a href="candidates.html">المرشحين</a>
-                    <a href="jobs.html">الوظائف</a>
+                    <a href="index.html">
+                        <i class="fas fa-chevron-left"></i>
+                        الرئيسية
+                    </a>
+                    <a href="companies.html">
+                        <i class="fas fa-chevron-left"></i>
+                        الشركات
+                    </a>
+                    <a href="candidates.html">
+                        <i class="fas fa-chevron-left"></i>
+                        المرشحين
+                    </a>
+                    <a href="jobs.html">
+                        <i class="fas fa-chevron-left"></i>
+                        الوظائف
+                    </a>
                 </div>
+                
                 <div>
                     <h4>تواصل معنا</h4>
-                    <p><i class="fas fa-phone"></i> 0770 123 4567</p>
-                    <p><i class="fas fa-envelope"></i> info@wathafni.iq</p>
-                    <p><i class="fas fa-map-marker-alt"></i> بغداد، العراق</p>
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        0770 123 4567
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        info@wathafni.iq
+                    </p>
+                    <p>
+                        <i class="fas fa-clock"></i>
+                        الأحد - الخميس: 9ص - 5م
+                    </p>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        بغداد، العراق
+                    </p>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>© 2024 وظفني - المنصة الذكية للتوظيف العراقي</p>
+                <p>© <span id="currentYear">2024</span> وظفني - المنصة الذكية للتوظيف العراقي. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>
@@ -113,78 +240,77 @@
     <!-- نافذة التسجيل -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
-            <h3>انضم إلينا</h3>
+            <h3>
+                <i class="fas fa-user-plus"></i>
+                انضم إلى مجتمعنا
+            </h3>
+            
             <div class="modal-tabs">
                 <button class="tab-btn active" onclick="switchTab('candidate')">
-                    <i class="fas fa-user"></i> باحث عن عمل
+                    <i class="fas fa-user"></i>
+                    باحث عن عمل
                 </button>
                 <button class="tab-btn" onclick="switchTab('company')">
-                    <i class="fas fa-building"></i> مسؤول توظيف
+                    <i class="fas fa-building"></i>
+                    مسؤول توظيف
                 </button>
             </div>
-            <div id="candidateForm" class="form">
-                <input type="text" id="candidateName" placeholder="الاسم الكامل">
-                <input type="email" id="candidateEmail" placeholder="البريد الإلكتروني">
-                <input type="password" id="candidatePassword" placeholder="كلمة المرور">
-                <button class="btn btn-primary" onclick="registerUser('candidate')">
-                    <i class="fas fa-user-plus"></i> إنشاء حساب
+            
+            <form id="candidateForm" class="form">
+                <input type="text" id="candidateName" placeholder="الاسم الكامل" required>
+                <input type="email" id="candidateEmail" placeholder="البريد الإلكتروني" required>
+                <input type="password" id="candidatePassword" placeholder="كلمة المرور (6 أحرف على الأقل)" minlength="6" required>
+                <select style="padding: 16px 20px; border: 2px solid #e5e7eb; border-radius: 12px;">
+                    <option>اختر مجال تخصصك</option>
+                    <option>تقنية المعلومات</option>
+                    <option>الهندسة</option>
+                    <option>المالية</option>
+                    <option>التسويق</option>
+                    <option>التعليم</option>
+                </select>
+                <button type="button" class="btn btn-primary" onclick="registerUser('candidate')">
+                    <i class="fas fa-user-plus"></i>
+                    إنشاء حساب مرشح
                 </button>
-            </div>
-            <div id="companyForm" class="form" style="display: none;">
-                <input type="text" id="companyName" placeholder="اسم الشركة">
-                <input type="email" id="companyEmail" placeholder="البريد المؤسسي">
-                <input type="password" id="companyPassword" placeholder="كلمة مرور الشركة">
-                <button class="btn btn-primary" onclick="registerUser('company')">
-                    <i class="fas fa-building"></i> طلب حساب
+            </form>
+            
+            <form id="companyForm" class="form" style="display: none;">
+                <input type="text" id="companyName" placeholder="اسم الشركة" required>
+                <input type="email" id="companyEmail" placeholder="البريد المؤسسي" required>
+                <input type="password" id="companyPassword" placeholder="كلمة مرور الشركة" minlength="6" required>
+                <select style="padding: 16px 20px; border: 2px solid #e5e7eb; border-radius: 12px;">
+                    <option>اختر قطاع الشركة</option>
+                    <option>تقنية المعلومات</option>
+                    <option>المالية والبنوك</option>
+                    <option>النفط والطاقة</option>
+                    <option>الصحة</option>
+                    <option>التعليم</option>
+                    <option>المقاولات</option>
+                </select>
+                <button type="button" class="btn btn-primary" onclick="registerUser('company')">
+                    <i class="fas fa-building"></i>
+                    طلب حساب شركة
                 </button>
-            </div>
-            <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
+            </form>
+            
+            <button class="btn btn-text" onclick="closeModal()" style="margin-top: 20px;">
+                <i class="fas fa-times"></i>
+                إلغاء
+            </button>
         </div>
     </div>
 
+    <script src="main.js"></script>
+    
     <script>
-        // وظائف JavaScript بسيطة
-        function showRegisterModal(type) {
-            document.getElementById('registerModal').style.display = 'flex';
-        }
+        // تحديث السنة الحالية
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        function closeModal() {
-            document.getElementById('registerModal').style.display = 'none';
-        }
-        
-        function switchTab(type) {
-            // إخفاء جميع النماذج
-            document.getElementById('candidateForm').style.display = 'none';
-            document.getElementById('companyForm').style.display = 'none';
-            
-            // إزالة active من جميع الأزرار
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // إظهار النموذج المختار وإضافة active للزر
-            if (type === 'candidate') {
-                document.getElementById('candidateForm').style.display = 'flex';
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
-            } else {
-                document.getElementById('companyForm').style.display = 'flex';
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-            }
-        }
-        
-        function registerUser(type) {
-            const name = type === 'candidate' ? 
-                document.getElementById('candidateName').value :
-                document.getElementById('companyName').value;
-            
-            alert('تم طلب إنشاء حساب ' + (type === 'candidate' ? 'مرشح' : 'شركة') + ' باسم: ' + name);
-            closeModal();
-        }
-        
-        // إغلاق النافذة عند النقر خارجها
-        document.getElementById('registerModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        // البحث في الصفحة الرئيسية
+        document.querySelector('.search-box button').addEventListener('click', function() {
+            const query = document.querySelector('.search-box input').value;
+            if (query) {
+                window.location.href = `jobs.html?search=${encodeURIComponent(query)}`;
             }
         });
     </script>
