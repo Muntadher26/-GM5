@@ -1,0 +1,12 @@
+# _config.yml
+title: "وظفني - المنصة الذكية للتوظيف العراقي"
+description: "أول منصة توظيف ذكية في العراق"
+baseurl: "" # اتركه فارغاً إذا كان في root
+url: "https://muntadher26.github.io"
+lang: "ar"
+rtl: true
+
+# GitHub Pages settings
+permalink: pretty
+markdown: kramdown
+highlighter: rouge
