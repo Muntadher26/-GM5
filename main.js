@@ -1,42 +1,46 @@
-// ========== تهيئة النظام ==========
+// ========== SYSTEM INITIALIZATION ==========
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 قدرات - تم تحميل الصفحة بنجاح');
+    console.log('🚀 وظفني - النظام جاهز');
     
-    // تهيئة الهيدر الذكي
-    initSmartHeader();
+    // تهيئة المكونات
+    initHeader();
+    initMobileMenu();
+    initModals();
+    initForms();
     
-    // تهيئة البيانات
-    initializeData();
-    
-    // تحميل الشركات إذا كانت الصفحة تحتوي على العنصر
+    // تحميل البيانات حسب الصفحة
     if (document.getElementById('companiesList')) {
-        console.log('🏢 تحميل قائمة الشركات...');
         loadCompanies();
-        setupFilterTags();
+        initFilters();
     }
     
-    // إعداد المستمعين للأحداث
-    setupEventListeners();
+    if (document.querySelector('.search-box')) {
+        initSearch();
+    }
     
-    // فحص حالة النظام
+    // تحديث السنة في الفوتر
+    updateCurrentYear();
+    
+    // تحسينات إضافية
+    initAnimations();
     checkSystemStatus();
 });
 
-// ========== الهيدر الذكي ==========
-function initSmartHeader() {
-    const header = document.querySelector('.header');
+// ========== HEADER FUNCTIONALITY ==========
+function initHeader() {
+    const header = document.querySelector('.site-header');
     if (!header) return;
     
-    // جعل الهيدر يتقلص بشكل أكثر وضوحاً
+    // جعل الهيدر يتقلص عند التمرير
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 30) { // قلل من 50 إلى 30
+        if (window.scrollY > 100) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
     });
     
-    // إضافة تأثير للشعار
+    // النقر على الشعار للعودة للأعلى
     const logo = document.querySelector('.logo');
     if (logo) {
         logo.addEventListener('click', function(e) {
@@ -49,58 +53,237 @@ function initSmartHeader() {
     }
 }
 
-// ========== إعداد event listeners ==========
-function setupEventListeners() {
-    // البحث في صفحة الشركات
-    const searchInput = document.getElementById('companySearch');
-    if (searchInput) {
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                searchCompanies();
-            }
-        });
-    }
+// ========== MOBILE MENU ==========
+function initMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const closeMenu = document.querySelector('.close-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
     
-    // البحث في الصفحة الرئيسية
-    document.querySelector('.search-box button')?.addEventListener('click', searchCompanies);
+    if (!menuToggle || !mobileMenu) return;
     
-    // إغلاق النافذة المنبثقة عند النقر خارجها
-    const modal = document.getElementById('registerModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-        
-        // إغلاق النافذة عند الضغط على زر الهروب
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-    }
-    
-    // أزرار التسجيل
-    document.querySelectorAll('.btn-primary').forEach(btn => {
-        if (btn.textContent.includes('تسجيل كشركة')) {
-            btn.addEventListener('click', function() {
-                showRegisterModal('company');
-            });
-        }
+    // فتح القائمة
+    menuToggle.addEventListener('click', function() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
     });
     
-    document.querySelectorAll('.btn-outline').forEach(btn => {
-        if (btn.textContent.includes('تسجيل كمرشح')) {
-            btn.addEventListener('click', function() {
-                showRegisterModal('candidate');
-            });
+    // إغلاق القائمة
+    if (closeMenu) {
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // إغلاق القائمة عند النقر على رابط
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // إغلاق القائمة عند النقر خارجها
+    document.addEventListener('click', function(event) {
+        if (mobileMenu.classList.contains('active') && 
+            !mobileMenu.contains(event.target) && 
+            event.target !== menuToggle) {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
         }
     });
 }
 
-// ========== تهيئة البيانات ==========
-function initializeData() {
+// ========== MODAL SYSTEM ==========
+function initModals() {
+    const registerModal = document.getElementById('registerModal');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    
+    if (!registerModal || !modalOverlay) return;
+    
+    // إغلاق النافذة عند النقر على الزر X
+    const closeButtons = document.querySelectorAll('[data-close-modal]');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+    
+    // إغلاق النافذة عند النقر خارجها
+    modalOverlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+    
+    // إغلاق النافذة عند الضغط على زر الهروب
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+    
+    // تبديل تبويبات التسجيل
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tab = this.dataset.tab;
+            switchRegisterTab(tab);
+        });
+    });
+}
+
+function showRegisterModal(type = 'candidate') {
+    const modalOverlay = document.querySelector('.modal-overlay');
+    if (!modalOverlay) return;
+    
+    modalOverlay.classList.add('active');
+    switchRegisterTab(type);
+    
+    // التركيز على أول حقل إدخال
+    setTimeout(() => {
+        const firstInput = modalOverlay.querySelector('input');
+        if (firstInput) firstInput.focus();
+    }, 100);
+}
+
+function closeModal() {
+    const modalOverlay = document.querySelector('.modal-overlay');
+    if (modalOverlay) {
+        modalOverlay.classList.remove('active');
+    }
+}
+
+function switchRegisterTab(tab) {
+    const forms = {
+        candidate: document.getElementById('candidateForm'),
+        company: document.getElementById('companyForm')
+    };
+    
+    const tabs = {
+        candidate: document.querySelector('[data-tab="candidate"]'),
+        company: document.querySelector('[data-tab="company"]')
+    };
+    
+    // إخفاء جميع النماذج
+    Object.values(forms).forEach(form => {
+        if (form) form.style.display = 'none';
+    });
+    
+    // إزالة النشاط من جميع الأزرار
+    Object.values(tabs).forEach(tabBtn => {
+        if (tabBtn) tabBtn.classList.remove('active');
+    });
+    
+    // إظهار النموذج المختار
+    if (forms[tab]) {
+        forms[tab].style.display = 'flex';
+    }
+    
+    // تفعيل الزر المختار
+    if (tabs[tab]) {
+        tabs[tab].classList.add('active');
+    }
+}
+
+// ========== FORM HANDLING ==========
+function initForms() {
+    // نموذج تسجيل المرشح
+    const candidateForm = document.getElementById('candidateForm');
+    if (candidateForm) {
+        candidateForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            registerCandidate();
+        });
+    }
+    
+    // نموذج تسجيل الشركة
+    const companyForm = document.getElementById('companyForm');
+    if (companyForm) {
+        companyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            registerCompany();
+        });
+    }
+}
+
+function registerCandidate() {
+    const name = document.getElementById('candidateName')?.value.trim();
+    const email = document.getElementById('candidateEmail')?.value.trim();
+    const password = document.getElementById('candidatePassword')?.value.trim();
+    
+    if (!validateForm(name, email, password)) return;
+    
+    // محاكاة الإرسال
+    const candidateData = {
+        type: 'candidate',
+        name: name,
+        email: email,
+        joined: new Date().toISOString()
+    };
+    
+    saveToLocalStorage('candidates', candidateData);
+    showNotification('تم إنشاء حساب المرشح بنجاح!', 'success');
+    closeModal();
+    resetForm('candidateForm');
+}
+
+function registerCompany() {
+    const name = document.getElementById('companyName')?.value.trim();
+    const email = document.getElementById('companyEmail')?.value.trim();
+    const password = document.getElementById('companyPassword')?.value.trim();
+    
+    if (!validateForm(name, email, password)) return;
+    
+    // محاكاة الإرسال
+    const companyData = {
+        type: 'company',
+        name: name,
+        email: email,
+        joined: new Date().toISOString()
+    };
+    
+    saveToLocalStorage('companies', companyData);
+    showNotification('تم إرسال طلب تسجيل الشركة بنجاح!', 'success');
+    closeModal();
+    resetForm('companyForm');
+}
+
+function validateForm(name, email, password) {
+    if (!name || !email || !password) {
+        showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+        return false;
+    }
+    
+    if (!isValidEmail(email)) {
+        showNotification('يرجى إدخال بريد إلكتروني صحيح', 'error');
+        return false;
+    }
+    
+    if (password.length < 6) {
+        showNotification('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function resetForm(formId) {
+    const form = document.getElementById(formId);
+    if (form) {
+        form.reset();
+    }
+}
+
+// ========== COMPANIES PAGE ==========
+function loadCompanies() {
+    const container = document.getElementById('companiesList');
+    if (!container) return;
+    
     // بيانات الشركات الافتراضية
     const defaultCompanies = [
         {
@@ -108,7 +291,8 @@ function initializeData() {
             name: "تكنو سوفت العراق",
             category: "tech",
             description: "شركة رائدة في مجال تطوير البرمجيات والحلول التقنية في العراق",
-            logo: "💻",
+            icon: "laptop-code",
+            color: "#3b82f6",
             jobs: 12,
             rating: 4.8,
             location: "بغداد",
@@ -119,7 +303,8 @@ function initializeData() {
             name: "بنك الرافدين",
             category: "finance",
             description: "أحد أكبر البنوك العراقية يقدم خدمات مصرفية متكاملة",
-            logo: "🏦",
+            icon: "university",
+            color: "#10b981",
             jobs: 24,
             rating: 4.6,
             location: "كافة المحافظات",
@@ -130,7 +315,8 @@ function initializeData() {
             name: "شركة نفط الجنوب",
             category: "energy",
             description: "الشركة الرائدة في مجال استخراج وتصنيع النفط والغاز",
-            logo: "⛽",
+            icon: "oil-can",
+            color: "#f59e0b",
             jobs: 45,
             rating: 4.9,
             location: "البصرة",
@@ -141,7 +327,8 @@ function initializeData() {
             name: "مستشفى الكفيل التخصصي",
             category: "health",
             description: "مستشفى متخصص يقدم خدمات طبية متطورة في كافة التخصصات",
-            logo: "🏥",
+            icon: "hospital",
+            color: "#ef4444",
             jobs: 18,
             rating: 4.7,
             location: "كربلاء",
@@ -152,7 +339,8 @@ function initializeData() {
             name: "زين العراق",
             category: "tech",
             description: "شركة اتصالات رائدة في العراق تقدم خدمات الجيل الرابع",
-            logo: "📱",
+            icon: "mobile-alt",
+            color: "#8b5cf6",
             jobs: 32,
             rating: 4.5,
             location: "كافة المحافظات",
@@ -163,424 +351,255 @@ function initializeData() {
             name: "مجموعة الناصر",
             category: "finance",
             description: "مجموعة استثمارية متنوعة الأنشطة في القطاع المالي والتجاري",
-            logo: "📊",
+            icon: "chart-line",
+            color: "#06b6d4",
             jobs: 15,
             rating: 4.4,
             location: "بغداد",
             established: 1998
-        },
-        {
-            id: 7,
-            name: "أسياد للإنشاءات",
-            category: "construction",
-            description: "شركة متخصصة في الإنشاءات والبنية التحتية",
-            logo: "🏗️",
-            jobs: 22,
-            rating: 4.3,
-            location: "أربيل",
-            established: 2005
-        },
-        {
-            id: 8,
-            name: "أكاديمية العراق الرقمية",
-            category: "education",
-            description: "مؤسسة تعليمية رائدة في مجال التدريب التقني",
-            logo: "🎓",
-            jobs: 8,
-            rating: 4.8,
-            location: "بغداد",
-            established: 2015
         }
     ];
     
-    // حفظ البيانات في localStorage إذا لم تكن موجودة
-    if (!localStorage.getItem('wathafni_companies')) {
-        localStorage.setItem('wathafni_companies', JSON.stringify(defaultCompanies));
+    // حفظ البيانات في localStorage
+    if (!localStorage.getItem('companies_data')) {
+        localStorage.setItem('companies_data', JSON.stringify(defaultCompanies));
     }
-}
-
-// ========== تحميل الشركات ==========
-function loadCompanies() {
-    const container = document.getElementById('companiesList');
-    if (!container) return;
     
-    // جلب البيانات من localStorage
-    const companies = JSON.parse(localStorage.getItem('wathafni_companies')) || [];
+    const companies = JSON.parse(localStorage.getItem('companies_data')) || defaultCompanies;
     
-    // مسح المحتوى القديم
+    // عرض الشركات
     container.innerHTML = '';
     
-    // التحقق من وجود شركات
     if (companies.length === 0) {
         container.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-building" style="font-size: 60px; color: #9ca3af; margin-bottom: 20px;"></i>
-                <h3 style="color: #6b7280;">لا توجد شركات مسجلة حالياً</h3>
-                <p style="color: #9ca3af;">كن أول من يسجل شركته في منصتنا</p>
+            <div class="text-center p-5">
+                <i class="fas fa-building fa-3x text-gray-400 mb-3"></i>
+                <h3 class="text-gray-600">لا توجد شركات مسجلة حالياً</h3>
+                <p class="text-gray-500 mb-4">كن أول من يسجل شركته في منصتنا</p>
                 <button class="btn btn-primary" onclick="showRegisterModal('company')">
-                    <i class="fas fa-building"></i> سجل شركتك الآن
+                    <i class="fas fa-building"></i>
+                    سجل شركتك الآن
                 </button>
             </div>
         `;
         return;
     }
     
-    // إنشاء بطاقات الشركات
     companies.forEach(company => {
-        const card = document.createElement('div');
-        card.className = 'company-card';
-        card.dataset.category = company.category;
-        
-        card.innerHTML = `
-            <div class="company-logo">${company.logo}</div>
-            <div class="company-info">
-                <h3>${company.name}</h3>
-                <span class="company-category">${getCategoryName(company.category)}</span>
-                <p class="company-description">${company.description}</p>
-                <div class="company-stats">
-                    <span><i class="fas fa-briefcase"></i> ${company.jobs} وظيفة</span>
-                    <span><i class="fas fa-star"></i> ${company.rating}/5</span>
-                    <span><i class="fas fa-map-marker-alt"></i> ${company.location}</span>
-                </div>
-            </div>
-            <button class="btn btn-outline btn-block" onclick="viewCompany(${company.id})">
-                <i class="fas fa-eye"></i> عرض التفاصيل
-            </button>
-        `;
-        
+        const card = createCompanyCard(company);
         container.appendChild(card);
     });
-    
-    // إضافة تأثيرات عند التمرير
-    animateOnScroll();
 }
 
-// ========== الحصول على اسم القطاع ==========
-function getCategoryName(category) {
-    const categories = {
-        'tech': 'تقنية المعلومات',
-        'finance': 'خدمات مالية',
-        'energy': 'طاقة ونفط',
-        'health': 'رعاية صحية',
-        'construction': 'إنشاءات',
-        'education': 'تعليم وتدريب'
+function createCompanyCard(company) {
+    const card = document.createElement('div');
+    card.className = 'company-card';
+    card.dataset.category = company.category;
+    
+    const categoryNames = {
+        tech: 'تقنية المعلومات',
+        finance: 'خدمات مالية',
+        energy: 'طاقة ونفط',
+        health: 'رعاية صحية',
+        construction: 'إنشاءات',
+        education: 'تعليم'
     };
-    return categories[category] || category;
+    
+    card.innerHTML = `
+        <div class="company-logo">
+            <i class="fas fa-${company.icon}" style="color: ${company.color}; font-size: 3rem;"></i>
+        </div>
+        <div class="company-info">
+            <h3 class="company-name">${company.name}</h3>
+            <span class="company-category">${categoryNames[company.category] || company.category}</span>
+            <p class="company-description">${company.description}</p>
+            <div class="company-stats">
+                <div class="company-stat">
+                    <i class="fas fa-briefcase"></i>
+                    <span>${company.jobs} وظيفة</span>
+                </div>
+                <div class="company-stat">
+                    <i class="fas fa-star"></i>
+                    <span>${company.rating}/5</span>
+                </div>
+                <div class="company-stat">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${company.location}</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-outline btn-block mt-3" onclick="viewCompanyDetails(${company.id})">
+            <i class="fas fa-eye"></i>
+            عرض التفاصيل
+        </button>
+    `;
+    
+    return card;
 }
 
-// ========== إعداد أزرار التصفية ==========
-function setupFilterTags() {
-    const tags = document.querySelectorAll('.filter-tag');
-    if (!tags.length) return;
+function initFilters() {
+    const filterTags = document.querySelectorAll('.filter-tag');
     
-    tags.forEach(tag => {
+    filterTags.forEach(tag => {
         tag.addEventListener('click', function() {
-            // إزالة active من جميع الأزرار
-            tags.forEach(t => t.classList.remove('active'));
+            // إزالة النشاط من جميع الأزرار
+            filterTags.forEach(t => t.classList.remove('active'));
             
-            // إضافة active للزر المضغوط
+            // تفعيل الزر المضغوط
             this.classList.add('active');
             
             // تصفية الشركات
-            const category = this.dataset.category;
+            const category = this.dataset.filter;
             filterCompanies(category);
         });
     });
 }
 
-// ========== تصفية الشركات ==========
 function filterCompanies(category) {
     const cards = document.querySelectorAll('.company-card');
     
     cards.forEach(card => {
         if (category === 'all' || card.dataset.category === category) {
-            card.style.display = 'flex';
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            
-            // إضافة تأثير الظهور
+            card.style.display = 'block';
             setTimeout(() => {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
-            }, 100);
+            }, 50);
         } else {
-            card.style.display = 'none';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 300);
         }
     });
 }
 
-// ========== بحث الشركات ==========
-function searchCompanies() {
-    const searchInput = document.getElementById('companySearch');
-    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+function viewCompanyDetails(companyId) {
+    const companies = JSON.parse(localStorage.getItem('companies_data')) || [];
+    const company = companies.find(c => c.id === companyId);
     
-    const cards = document.querySelectorAll('.company-card');
-    let resultsFound = 0;
-    
-    cards.forEach(card => {
-        const companyName = card.querySelector('h3').textContent.toLowerCase();
-        const companyDesc = card.querySelector('.company-description').textContent.toLowerCase();
-        const companyCategory = card.querySelector('.company-category').textContent.toLowerCase();
-        
-        if (companyName.includes(searchTerm) || 
-            companyDesc.includes(searchTerm) || 
-            companyCategory.includes(searchTerm)) {
-            card.style.display = 'flex';
-            card.style.animation = 'fadeIn 0.5s ease';
-            resultsFound++;
-        } else {
-            card.style.display = 'none';
-        }
-    });
-    
-    // إظهار رسالة إذا لم توجد نتائج
-    if (searchTerm && resultsFound === 0) {
-        showNotification('لم يتم العثور على شركات تطابق بحثك', 'info');
+    if (!company) {
+        showNotification('لم يتم العثور على الشركة', 'error');
+        return;
     }
+    
+    const modalContent = `
+        <div class="modal-header">
+            <h3 class="modal-title">
+                <i class="fas fa-building"></i>
+                ${company.name}
+            </h3>
+            <button type="button" class="btn btn-text" data-close-modal>
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="text-center mb-4">
+            <i class="fas fa-${company.icon}" style="font-size: 4rem; color: ${company.color};"></i>
+        </div>
+        
+        <div class="bg-gray rounded-lg p-4 mb-4">
+            <p class="text-muted">${company.description}</p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="bg-white p-3 rounded-lg text-center">
+                <div class="text-2xl font-bold text-primary">${company.jobs}</div>
+                <div class="text-sm text-muted">وظيفة شاغرة</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg text-center">
+                <div class="text-2xl font-bold text-success">${company.rating}</div>
+                <div class="text-sm text-muted">التقييم</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg text-center">
+                <div class="text-xl font-bold text-warning">${company.location}</div>
+                <div class="text-sm text-muted">المكان</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg text-center">
+                <div class="text-xl font-bold text-purple">${company.established}</div>
+                <div class="text-sm text-muted">سنة التأسيس</div>
+            </div>
+        </div>
+        
+        <div class="modal-actions">
+            <button class="btn btn-primary flex-1" onclick="applyToCompany(${company.id})">
+                <i class="fas fa-paper-plane"></i>
+                التقدم للوظائف
+            </button>
+            <button class="btn btn-outline flex-1" data-close-modal>
+                إغلاق
+            </button>
+        </div>
+    `;
+    
+    showCustomModal(modalContent);
 }
 
-// ========== عرض تفاصيل الشركة ==========
-function viewCompany(id) {
-    const companies = JSON.parse(localStorage.getItem('wathafni_companies')) || [];
-    const company = companies.find(c => c.id === id);
+function applyToCompany(companyId) {
+    showNotification('تم إرسال طلبك بنجاح!', 'success');
+    closeModal();
+}
+
+// ========== SEARCH FUNCTIONALITY ==========
+function initSearch() {
+    const searchInput = document.querySelector('.search-input');
+    const searchButton = document.querySelector('.search-button');
     
-    if (company) {
-        // إنشاء نافذة تفاصيل الشركة
-        const modal = document.createElement('div');
-        modal.className = 'modal';
-        modal.id = 'companyModal';
-        modal.style.display = 'flex';
+    if (searchInput && searchButton) {
+        // البحث عند النقر على الزر
+        searchButton.addEventListener('click', performSearch);
         
-        modal.innerHTML = `
-            <div class="modal-content" style="max-width: 600px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 style="margin: 0;"><i class="fas fa-building"></i> ${company.name}</h3>
-                    <button onclick="closeCompanyModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;">×</button>
-                </div>
-                
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="font-size: 70px; margin-bottom: 20px;">${company.logo}</div>
-                    <span class="company-category" style="font-size: 16px;">${getCategoryName(company.category)}</span>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                    <p style="color: #4b5563; line-height: 1.8; font-size: 16px;">${company.description}</p>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px;">
-                    <div style="text-align: center; padding: 15px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <div style="font-size: 24px; color: #3b82f6; margin-bottom: 5px;"><i class="fas fa-briefcase"></i></div>
-                        <div style="font-weight: 600; color: #1f2937;">${company.jobs} وظيفة</div>
-                    </div>
-                    <div style="text-align: center; padding: 15px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <div style="font-size: 24px; color: #10b981; margin-bottom: 5px;"><i class="fas fa-star"></i></div>
-                        <div style="font-weight: 600; color: #1f2937;">${company.rating}/5 تقييم</div>
-                    </div>
-                    <div style="text-align: center; padding: 15px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <div style="font-size: 24px; color: #f59e0b; margin-bottom: 5px;"><i class="fas fa-map-marker-alt"></i></div>
-                        <div style="font-weight: 600; color: #1f2937;">${company.location}</div>
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary btn-block" onclick="applyToCompany(${company.id})">
-                    <i class="fas fa-paper-plane"></i> التقدم للوظائف
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // إغلاق النافذة عند النقر خارجها
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeCompanyModal();
+        // البحث عند الضغط على Enter
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
             }
         });
     }
 }
 
-function closeCompanyModal() {
-    const modal = document.getElementById('companyModal');
-    if (modal) {
-        modal.remove();
-    }
-}
-
-function applyToCompany(companyId) {
-    showNotification('تم إرسال طلبك بنجاح! ستتصل بك الشركة قريباً', 'success');
-    closeCompanyModal();
-}
-
-// ========== النافذة المنبثقة للتسجيل ==========
-function showRegisterModal(type) {
-    const modal = document.getElementById('registerModal');
-    if (!modal) return;
+function performSearch() {
+    const searchInput = document.querySelector('.search-input');
+    const searchTerm = searchInput.value.trim();
     
-    modal.style.display = 'flex';
-    
-    // تبديل التبويب للنوع المحدد
-    if (type === 'company') {
-        switchTab('company');
-    } else {
-        switchTab('candidate');
-    }
-    
-    // إضافة تأثير التركيز على أول حقل
-    setTimeout(() => {
-        const firstInput = modal.querySelector('input');
-        if (firstInput) {
-            firstInput.focus();
-        }
-    }, 300);
-}
-
-function closeModal() {
-    const modal = document.getElementById('registerModal');
-    if (modal) {
-        modal.style.animation = 'fadeOut 0.3s ease';
-        setTimeout(() => {
-            modal.style.display = 'none';
-            modal.style.animation = '';
-        }, 300);
-    }
-}
-
-function switchTab(type) {
-    const candidateForm = document.getElementById('candidateForm');
-    const companyForm = document.getElementById('companyForm');
-    const tabs = document.querySelectorAll('.tab-btn');
-    
-    if (!candidateForm || !companyForm) return;
-    
-    // إخفاء جميع النماذج
-    candidateForm.style.display = 'none';
-    companyForm.style.display = 'none';
-    
-    // إزالة active من جميع الأزرار
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // إظهار النموذج المختار وإضافة active للزر
-    if (type === 'candidate') {
-        candidateForm.style.display = 'flex';
-        tabs[0].classList.add('active');
-    } else {
-        companyForm.style.display = 'flex';
-        tabs[1].classList.add('active');
-    }
-}
-
-function registerUser(type) {
-    let name, email, password;
-    
-    if (type === 'candidate') {
-        name = document.getElementById('candidateName').value.trim();
-        email = document.getElementById('candidateEmail').value.trim();
-        password = document.getElementById('candidatePassword').value.trim();
-    } else {
-        name = document.getElementById('companyName').value.trim();
-        email = document.getElementById('companyEmail').value.trim();
-        password = document.getElementById('companyPassword').value.trim();
-    }
-    
-    // التحقق من المدخلات
-    if (!name || !email || !password) {
-        showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+    if (!searchTerm) {
+        showNotification('يرجى إدخال كلمة للبحث', 'info');
         return;
     }
     
-    if (password.length < 6) {
-        showNotification('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
-        return;
-    }
-    
-    // محاكاة إرسال البيانات
-    const userData = {
-        type: type,
-        name: name,
-        email: email,
-        timestamp: new Date().toISOString()
-    };
-    
-    // حفظ في localStorage
-    let users = JSON.parse(localStorage.getItem('wathafni_users')) || [];
-    users.push(userData);
-    localStorage.setItem('wathafni_users', JSON.stringify(users));
-    
-    // عرض رسالة النجاح
-    const message = type === 'candidate' 
-        ? `تم إنشاء حساب المرشح بنجاح! مرحباً ${name}`
-        : `تم إرسال طلب حساب الشركة بنجاح! سنتواصل مع ${name} قريباً`;
-    
-    showNotification(message, 'success');
-    
-    // إغلاق النافذة وتنظيف الحقول
-    closeModal();
-    clearFormFields();
-    
-    // إذا كانت شركة جديدة، أضفها للقائمة
-    if (type === 'company') {
-        addNewCompany(name);
-    }
+    // توجيه إلى صفحة الوظائف مع كلمة البحث
+    window.location.href = `jobs.html?search=${encodeURIComponent(searchTerm)}`;
 }
 
-function clearFormFields() {
-    // مسح جميع حقول النماذج
-    const inputs = document.querySelectorAll('#candidateForm input, #companyForm input');
-    inputs.forEach(input => input.value = '');
-}
-
-function addNewCompany(companyName) {
-    const companies = JSON.parse(localStorage.getItem('wathafni_companies')) || [];
-    
-    const newCompany = {
-        id: companies.length + 1,
-        name: companyName,
-        category: "tech",
-        description: "شركة جديدة مسجلة في منصة قدرات",
-        logo: "🏢",
-        jobs: Math.floor(Math.random() * 20) + 1,
-        rating: (Math.random() * 1 + 4).toFixed(1),
-        location: "بغداد",
-        established: new Date().getFullYear()
-    };
-    
-    companies.push(newCompany);
-    localStorage.setItem('wathafni_companies', JSON.stringify(companies));
-    
-    // إعادة تحميل القائمة إذا كنا في صفحة الشركات
-    if (document.getElementById('companiesList')) {
-        loadCompanies();
-    }
-}
-
-// ========== إشعارات ==========
+// ========== UTILITY FUNCTIONS ==========
 function showNotification(message, type = 'info') {
-    // إزالة أي إشعارات سابقة
-    const oldNotification = document.querySelector('.notification');
-    if (oldNotification) {
-        oldNotification.remove();
+    // إنصراف أي إشعارات سابقة
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
     }
     
-    // إنشاء الإشعار
+    // إنشاء الإشعار الجديد
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     
     const icons = {
-        'success': 'check-circle',
-        'error': 'exclamation-circle',
-        'info': 'info-circle',
-        'warning': 'exclamation-triangle'
+        success: 'check-circle',
+        error: 'exclamation-circle',
+        info: 'info-circle',
+        warning: 'exclamation-triangle'
     };
     
     notification.innerHTML = `
-        <i class="fas fa-${icons[type] || 'info-circle'}"></i>
+        <i class="fas fa-${icons[type]}"></i>
         <span>${message}</span>
-        <button onclick="this.parentElement.remove()" style="background: none; border: none; cursor: pointer; color: inherit;">×</button>
+        <button class="close-notification">
+            <i class="fas fa-times"></i>
+        </button>
     `;
     
-    // إضافة أنماط للإشعار
+    // إضافة الأنماط
     const style = document.createElement('style');
     style.textContent = `
         .notification {
@@ -589,46 +608,51 @@ function showNotification(message, type = 'info') {
             left: 50%;
             transform: translateX(-50%);
             background: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 1rem;
             z-index: 3000;
             animation: slideDown 0.3s ease;
             max-width: 500px;
             width: 90%;
+            border-right: 4px solid;
         }
         
         .notification-success {
-            border-right: 4px solid #10b981;
+            border-color: #10b981;
             color: #065f46;
         }
         
         .notification-error {
-            border-right: 4px solid #ef4444;
+            border-color: #ef4444;
             color: #7f1d1d;
         }
         
         .notification-info {
-            border-right: 4px solid #3b82f6;
+            border-color: #3b82f6;
             color: #1e3a8a;
         }
         
         .notification-warning {
-            border-right: 4px solid #f59e0b;
+            border-color: #f59e0b;
             color: #92400e;
         }
         
-        .notification i {
-            font-size: 20px;
+        .notification i:first-child {
+            font-size: 1.25rem;
         }
         
-        .notification button {
+        .close-notification {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: inherit;
             margin-right: auto;
-            font-size: 20px;
-            padding: 0 8px;
+            font-size: 1.25rem;
+            padding: 0 0.5rem;
         }
         
         @keyframes slideDown {
@@ -646,7 +670,12 @@ function showNotification(message, type = 'info') {
     document.head.appendChild(style);
     document.body.appendChild(notification);
     
-    // إزالة الإشعار تلقائياً بعد 5 ثواني
+    // إغلاق الإشعار عند النقر على الزر X
+    notification.querySelector('.close-notification').addEventListener('click', function() {
+        notification.remove();
+    });
+    
+    // إزالة الإشعار تلقائياً بعد 5 ثوانٍ
     setTimeout(() => {
         if (notification.parentElement) {
             notification.remove();
@@ -654,8 +683,33 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// ========== تأثيرات التمرير ==========
-function animateOnScroll() {
+function showCustomModal(content) {
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalContent = document.querySelector('.modal-content');
+    
+    if (!modalOverlay || !modalContent) return;
+    
+    modalContent.innerHTML = content;
+    modalOverlay.classList.add('active');
+}
+
+function saveToLocalStorage(key, data) {
+    let items = JSON.parse(localStorage.getItem(key)) || [];
+    items.push(data);
+    localStorage.setItem(key, JSON.stringify(items));
+}
+
+function updateCurrentYear() {
+    const yearElements = document.querySelectorAll('[data-current-year]');
+    const currentYear = new Date().getFullYear();
+    
+    yearElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+}
+
+function initAnimations() {
+    // تأثيرات الظهور عند التمرير
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -664,51 +718,32 @@ function animateOnScroll() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animate-in');
             }
         });
     }, observerOptions);
     
-    // تطبيق على جميع البطاقات
-    document.querySelectorAll('.company-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
+    // تطبيق على العناصر
+    document.querySelectorAll('.feature-card, .company-card').forEach(element => {
+        observer.observe(element);
     });
 }
 
-// ========== فحص حالة النظام ==========
 function checkSystemStatus() {
-    console.log('🔍 فحص حالة النظام:');
+    console.log('🔍 حالة النظام:');
     console.log('- المتصفح:', navigator.userAgent);
-    console.log('- الشاشة:', window.innerWidth, 'x', window.innerHeight);
-    console.log('- اللغة:', navigator.language);
-    console.log('- الاتصال:', navigator.onLine ? 'متصل' : 'غير متصل');
+    console.log('- دعم localStorage:', typeof Storage !== 'undefined' ? 'نعم' : 'لا');
+    console.log('- الاتصال بالإنترنت:', navigator.onLine ? 'متصل' : 'غير متصل');
     
-    // التحقق من دعم localStorage
-    if (typeof Storage !== 'undefined') {
-        console.log('- localStorage: مدعوم');
-    } else {
-        console.error('- localStorage: غير مدعوم');
-        showNotification('المتصفح لا يدعم حفظ البيانات محلياً', 'warning');
+    if (!navigator.onLine) {
+        showNotification('أنت غير متصل بالإنترنت. بعض الميزات قد لا تعمل.', 'warning');
     }
 }
 
-// ========== دالات مساعدة ==========
-function formatNumber(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function getCurrentYear() {
-    return new Date().getFullYear();
-}
-
-// تحديث السنة في الفوتر
-document.addEventListener('DOMContentLoaded', function() {
-    const yearElement = document.querySelector('.copyright p');
-    if (yearElement) {
-        yearElement.innerHTML = yearElement.innerHTML.replace('2024', getCurrentYear());
-    }
-});
+// ========== GLOBAL FUNCTIONS ==========
+window.showRegisterModal = showRegisterModal;
+window.closeModal = closeModal;
+window.viewCompanyDetails = viewCompanyDetails;
+window.applyToCompany = applyToCompany;
+window.filterCompanies = filterCompanies;
+window.performSearch = performSearch;
