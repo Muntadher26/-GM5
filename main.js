@@ -25,13 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========== الهيدر الذكي ==========
 function initSmartHeader() {
     const header = document.querySelector('.header');
-    
-    // التحقق من وجود الهيدر
     if (!header) return;
     
-    // إضافة مستمع للتمرير
+    // جعل الهيدر يتقلص بشكل أكثر وضوحاً
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 30) { // قلل من 50 إلى 30
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
