@@ -1,12 +1,20 @@
 # _config.yml
 title: "وظفني - المنصة الذكية للتوظيف العراقي"
 description: "أول منصة توظيف ذكية في العراق"
-baseurl: "" # اتركه فارغاً إذا كان في root
-url: "https://muntadher26.github.io"
+baseurl: ""
+url: "https://muntadher26.github.io/Quadrat"
 lang: "ar"
 rtl: true
 
-# GitHub Pages settings
+# إعدادات GitHub Pages
 permalink: pretty
 markdown: kramdown
 highlighter: rouge
+plugins:
+  - jekyll-feed
+
+# إعدادات الموقع
+theme: null
+exclude:
+  - README.md
+  - nojekyll.sh
